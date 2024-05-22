@@ -1,0 +1,158 @@
+   1              	 .syntax unified
+   2              	 .cpu cortex-m4
+   3              	 .eabi_attribute 27,3
+   4              	 .fpu fpv4-sp-d16
+   5              	 .eabi_attribute 20,1
+   6              	 .eabi_attribute 21,1
+   7              	 .eabi_attribute 23,3
+   8              	 .eabi_attribute 24,1
+   9              	 .eabi_attribute 25,1
+  10              	 .eabi_attribute 26,1
+  11              	 .eabi_attribute 30,6
+  12              	 .eabi_attribute 34,1
+  13              	 .eabi_attribute 18,4
+  14              	 .thumb
+  15              	 .file "adc_measurement_conf.c"
+  16              	 .text
+  17              	.Ltext0:
+  18              	 .cfi_sections .debug_frame
+  19              	 .global global_iclass_config
+  20              	 .section .rodata.global_iclass_config,"a",%progbits
+  21              	 .align 2
+  24              	global_iclass_config:
+  25 0000 10       	 .byte 16
+  26 0001 00       	 .byte 0
+  27 0002 0000     	 .space 2
+  28              	 .global Resultado_LDR_ch_config
+  29              	 .section .data.Resultado_LDR_ch_config,"aw",%progbits
+  30              	 .align 2
+  33              	Resultado_LDR_ch_config:
+  34 0000 02       	 .byte 2
+  35 0001 00       	 .byte 0
+  36 0002 2F       	 .byte 47
+  37 0003 00       	 .byte 0
+  38 0004 00000000 	 .word 0
+  39 0008 00000000 	 .space 4
+  40 000c 00       	 .byte 0
+  41 000d FF       	 .byte -1
+  42 000e 0000     	 .space 2
+  43              	 .global Resultado_LDR_res_config
+  44              	 .section .bss.Resultado_LDR_res_config,"aw",%nobits
+  45              	 .align 2
+  48              	Resultado_LDR_res_config:
+  49 0000 00000000 	 .space 4
+  50              	 .global ADC_MEASUREMENT_Resultado_LDR_handle
+  51              	 .section .data.ADC_MEASUREMENT_Resultado_LDR_handle,"aw",%progbits
+  52              	 .align 2
+  55              	ADC_MEASUREMENT_Resultado_LDR_handle:
+  56 0000 00000000 	 .word Resultado_LDR_ch_config
+  57 0004 00000000 	 .word Resultado_LDR_res_config
+  58 0008 00440040 	 .word 1073759232
+  59 000c 00000000 	 .word ANALOG_IO_0
+  60 0010 00       	 .byte 0
+  61 0011 07       	 .byte 7
+  62 0012 0000     	 .space 2
+  63              	 .global Resultado_potenciometro_ch_config
+  64              	 .section .data.Resultado_potenciometro_ch_config,"aw",%progbits
+  65              	 .align 2
+  68              	Resultado_potenciometro_ch_config:
+  69 0000 02       	 .byte 2
+  70 0001 00       	 .byte 0
+  71 0002 24       	 .byte 36
+  72 0003 00       	 .byte 0
+  73 0004 00000000 	 .word 0
+  74 0008 00000000 	 .space 4
+  75 000c 00       	 .byte 0
+  76 000d FF       	 .byte -1
+  77 000e 0000     	 .space 2
+  78              	 .global Resultado_potenciometro_res_config
+  79              	 .section .bss.Resultado_potenciometro_res_config,"aw",%nobits
+  80              	 .align 2
+  83              	Resultado_potenciometro_res_config:
+  84 0000 00000000 	 .space 4
+  85              	 .global ADC_MEASUREMENT_Resultado_potenciometro_handle
+  86              	 .section .data.ADC_MEASUREMENT_Resultado_potenciometro_handle,"aw",%progbits
+  87              	 .align 2
+  90              	ADC_MEASUREMENT_Resultado_potenciometro_handle:
+  91 0000 00000000 	 .word Resultado_potenciometro_ch_config
+  92 0004 00000000 	 .word Resultado_potenciometro_res_config
+  93 0008 00440040 	 .word 1073759232
+  94 000c 00000000 	 .word ANALOG_IO_1
+  95 0010 00       	 .byte 0
+  96 0011 00       	 .byte 0
+  97 0012 0000     	 .space 2
+  98              	 .global ADC_MEASUREMENT_channel_array
+  99              	 .section .data.ADC_MEASUREMENT_channel_array,"aw",%progbits
+ 100              	 .align 2
+ 103              	ADC_MEASUREMENT_channel_array:
+ 104 0000 00000000 	 .word ADC_MEASUREMENT_Resultado_LDR_handle
+ 105 0004 00000000 	 .word ADC_MEASUREMENT_Resultado_potenciometro_handle
+ 106              	 .global backgnd_config
+ 107              	 .section .rodata.backgnd_config,"a",%progbits
+ 108              	 .align 2
+ 111              	backgnd_config:
+ 112 0000 05       	 .byte 5
+ 113 0001 000000   	 .space 3
+ 114 0004 00       	 .space 1
+ 115 0005 0F       	 .byte 15
+ 116 0006 03       	 .byte 3
+ 117 0007 00       	 .byte 0
+ 118 0008 10       	 .byte 16
+ 119 0009 000000   	 .space 3
+ 120              	 .global ADC_MEASUREMENT_0
+ 121              	 .section .data.ADC_MEASUREMENT_0,"aw",%progbits
+ 122              	 .align 2
+ 125              	ADC_MEASUREMENT_0:
+ 126 0000 00000000 	 .word ADC_MEASUREMENT_channel_array
+ 127 0004 00000000 	 .word backgnd_config
+ 128 0008 00000000 	 .word global_iclass_config
+ 129 000c 00000000 	 .word GLOBAL_ADC_0
+ 130 0010 00000000 	 .word 0
+ 131 0014 00000000 	 .word 0
+ 132 0018 02       	 .byte 2
+ 133 0019 04       	 .byte 4
+ 134 001a 01       	 .byte 1
+ 135 001b 00       	 .space 1
+ 136              	 .text
+ 137              	.Letext0:
+ 138              	 .file 1 "c:\\infineon\\tools\\dave ide\\4.5.0.202105191637\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 139              	 .file 2 "c:\\infineon\\tools\\dave ide\\4.5.0.202105191637\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 140              	 .file 3 "C:/LETI/2_ano/SISEM/Versao22-05-24/SISEM_2024_2DB_02_C/Libraries/CMSIS/Infineon/XMC4200_series/Include/XMC4200.h"
+ 141              	 .file 4 "C:/LETI/2_ano/SISEM/Versao22-05-24/SISEM_2024_2DB_02_C/Libraries/XMCLib/inc/xmc_vadc.h"
+ 142              	 .file 5 "C:/LETI/2_ano/SISEM/Versao22-05-24/SISEM_2024_2DB_02_C/Dave/Generated/GLOBAL_ADC/global_adc.h"
+ 143              	 .file 6 "C:/LETI/2_ano/SISEM/Versao22-05-24/SISEM_2024_2DB_02_C/Libraries/XMCLib/inc/xmc4_gpio.h"
+ 144              	 .file 7 "C:/LETI/2_ano/SISEM/Versao22-05-24/SISEM_2024_2DB_02_C/Dave/Generated/ANALOG_IO/analog_io.h"
+ 145              	 .file 8 "../Dave/Generated/ADC_MEASUREMENT/adc_measurement.h"
+ 146              	 .file 9 "C:/LETI/2_ano/SISEM/Versao22-05-24/SISEM_2024_2DB_02_C/Libraries/CMSIS/Include/cmsis_gcc.h"
+ 147              	 .file 10 "C:/LETI/2_ano/SISEM/Versao22-05-24/SISEM_2024_2DB_02_C/Libraries/CMSIS/Include/core_cm4.h"
+ 148              	 .file 11 "C:/LETI/2_ano/SISEM/Versao22-05-24/SISEM_2024_2DB_02_C/Libraries/CMSIS/Infineon/XMC4200_series/Include/system_XMC4200.h"
+ 149              	 .file 12 "C:/LETI/2_ano/SISEM/Versao22-05-24/SISEM_2024_2DB_02_C/Dave/Generated/GLOBAL_ADC/global_adc_extern.h"
+ 150              	 .file 13 "C:/LETI/2_ano/SISEM/Versao22-05-24/SISEM_2024_2DB_02_C/Dave/Generated/ANALOG_IO/analog_io_extern.h"
+ 151              	 .file 14 "../Dave/Generated/ADC_MEASUREMENT/adc_measurement_conf.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 adc_measurement_conf.c
+    {standard input}:24     .rodata.global_iclass_config:00000000 global_iclass_config
+    {standard input}:21     .rodata.global_iclass_config:00000000 $d
+    {standard input}:33     .data.Resultado_LDR_ch_config:00000000 Resultado_LDR_ch_config
+    {standard input}:30     .data.Resultado_LDR_ch_config:00000000 $d
+    {standard input}:48     .bss.Resultado_LDR_res_config:00000000 Resultado_LDR_res_config
+    {standard input}:45     .bss.Resultado_LDR_res_config:00000000 $d
+    {standard input}:55     .data.ADC_MEASUREMENT_Resultado_LDR_handle:00000000 ADC_MEASUREMENT_Resultado_LDR_handle
+    {standard input}:52     .data.ADC_MEASUREMENT_Resultado_LDR_handle:00000000 $d
+    {standard input}:68     .data.Resultado_potenciometro_ch_config:00000000 Resultado_potenciometro_ch_config
+    {standard input}:65     .data.Resultado_potenciometro_ch_config:00000000 $d
+    {standard input}:83     .bss.Resultado_potenciometro_res_config:00000000 Resultado_potenciometro_res_config
+    {standard input}:80     .bss.Resultado_potenciometro_res_config:00000000 $d
+    {standard input}:90     .data.ADC_MEASUREMENT_Resultado_potenciometro_handle:00000000 ADC_MEASUREMENT_Resultado_potenciometro_handle
+    {standard input}:87     .data.ADC_MEASUREMENT_Resultado_potenciometro_handle:00000000 $d
+    {standard input}:103    .data.ADC_MEASUREMENT_channel_array:00000000 ADC_MEASUREMENT_channel_array
+    {standard input}:100    .data.ADC_MEASUREMENT_channel_array:00000000 $d
+    {standard input}:111    .rodata.backgnd_config:00000000 backgnd_config
+    {standard input}:108    .rodata.backgnd_config:00000000 $d
+    {standard input}:125    .data.ADC_MEASUREMENT_0:00000000 ADC_MEASUREMENT_0
+    {standard input}:122    .data.ADC_MEASUREMENT_0:00000000 $d
+
+UNDEFINED SYMBOLS
+ANALOG_IO_0
+ANALOG_IO_1
+GLOBAL_ADC_0

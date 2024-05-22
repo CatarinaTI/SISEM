@@ -1,0 +1,164 @@
+   1              	 .syntax unified
+   2              	 .cpu cortex-m4
+   3              	 .eabi_attribute 27,3
+   4              	 .fpu fpv4-sp-d16
+   5              	 .eabi_attribute 20,1
+   6              	 .eabi_attribute 21,1
+   7              	 .eabi_attribute 23,3
+   8              	 .eabi_attribute 24,1
+   9              	 .eabi_attribute 25,1
+  10              	 .eabi_attribute 26,1
+  11              	 .eabi_attribute 30,6
+  12              	 .eabi_attribute 34,1
+  13              	 .eabi_attribute 18,4
+  14              	 .thumb
+  15              	 .file "customtime.c"
+  16              	 .text
+  17              	.Ltext0:
+  18              	 .cfi_sections .debug_frame
+  19              	 .section .text.updateTime,"ax",%progbits
+  20              	 .align 2
+  21              	 .global updateTime
+  22              	 .thumb
+  23              	 .thumb_func
+  25              	updateTime:
+  26              	.LFB0:
+  27              	 .file 1 "../customtime.c"
+   1:../customtime.c **** /*
+   2:../customtime.c ****  * time.c
+   3:../customtime.c ****  *
+   4:../customtime.c ****  *  Created on: Mar 6, 2024
+   5:../customtime.c ****  *      Author: Ricardo França
+   6:../customtime.c ****  */
+   7:../customtime.c **** 
+   8:../customtime.c **** #include <customtime.h>
+   9:../customtime.c **** 
+  10:../customtime.c **** void updateTime(time_struct_t *time){
+  28              	 .loc 1 10 0
+  29              	 .cfi_startproc
+  30              	 
+  31              	 
+  32              	 
+  33 0000 80B4     	 push {r7}
+  34              	.LCFI0:
+  35              	 .cfi_def_cfa_offset 4
+  36              	 .cfi_offset 7,-4
+  37 0002 83B0     	 sub sp,sp,#12
+  38              	.LCFI1:
+  39              	 .cfi_def_cfa_offset 16
+  40 0004 00AF     	 add r7,sp,#0
+  41              	.LCFI2:
+  42              	 .cfi_def_cfa_register 7
+  43 0006 7860     	 str r0,[r7,#4]
+  11:../customtime.c **** 	if(time->millis == 1000){
+  44              	 .loc 1 11 0
+  45 0008 7B68     	 ldr r3,[r7,#4]
+  46 000a 1B68     	 ldr r3,[r3]
+  47 000c B3F57A7F 	 cmp r3,#1000
+  48 0010 08D1     	 bne .L2
+  12:../customtime.c **** 		time->seconds++;
+  49              	 .loc 1 12 0
+  50 0012 7B68     	 ldr r3,[r7,#4]
+  51 0014 9B88     	 ldrh r3,[r3,#4]
+  52 0016 0133     	 adds r3,r3,#1
+  53 0018 9AB2     	 uxth r2,r3
+  54 001a 7B68     	 ldr r3,[r7,#4]
+  55 001c 9A80     	 strh r2,[r3,#4]
+  13:../customtime.c **** 		time->millis = 0;
+  56              	 .loc 1 13 0
+  57 001e 7B68     	 ldr r3,[r7,#4]
+  58 0020 0022     	 movs r2,#0
+  59 0022 1A60     	 str r2,[r3]
+  60              	.L2:
+  14:../customtime.c **** 	}
+  15:../customtime.c **** 	if(time->seconds == 60){
+  61              	 .loc 1 15 0
+  62 0024 7B68     	 ldr r3,[r7,#4]
+  63 0026 9B88     	 ldrh r3,[r3,#4]
+  64 0028 3C2B     	 cmp r3,#60
+  65 002a 08D1     	 bne .L3
+  16:../customtime.c **** 		time->minutes++;
+  66              	 .loc 1 16 0
+  67 002c 7B68     	 ldr r3,[r7,#4]
+  68 002e DB88     	 ldrh r3,[r3,#6]
+  69 0030 0133     	 adds r3,r3,#1
+  70 0032 9AB2     	 uxth r2,r3
+  71 0034 7B68     	 ldr r3,[r7,#4]
+  72 0036 DA80     	 strh r2,[r3,#6]
+  17:../customtime.c **** 		time->seconds = 0;
+  73              	 .loc 1 17 0
+  74 0038 7B68     	 ldr r3,[r7,#4]
+  75 003a 0022     	 movs r2,#0
+  76 003c 9A80     	 strh r2,[r3,#4]
+  77              	.L3:
+  18:../customtime.c **** 	}
+  19:../customtime.c **** 	if(time->minutes == 60){
+  78              	 .loc 1 19 0
+  79 003e 7B68     	 ldr r3,[r7,#4]
+  80 0040 DB88     	 ldrh r3,[r3,#6]
+  81 0042 3C2B     	 cmp r3,#60
+  82 0044 08D1     	 bne .L4
+  20:../customtime.c **** 		time->hours++;
+  83              	 .loc 1 20 0
+  84 0046 7B68     	 ldr r3,[r7,#4]
+  85 0048 1B89     	 ldrh r3,[r3,#8]
+  86 004a 0133     	 adds r3,r3,#1
+  87 004c 9AB2     	 uxth r2,r3
+  88 004e 7B68     	 ldr r3,[r7,#4]
+  89 0050 1A81     	 strh r2,[r3,#8]
+  21:../customtime.c **** 		time->minutes = 0;
+  90              	 .loc 1 21 0
+  91 0052 7B68     	 ldr r3,[r7,#4]
+  92 0054 0022     	 movs r2,#0
+  93 0056 DA80     	 strh r2,[r3,#6]
+  94              	.L4:
+  22:../customtime.c **** 	}
+  23:../customtime.c **** 	if(time->hours == 24){
+  95              	 .loc 1 23 0
+  96 0058 7B68     	 ldr r3,[r7,#4]
+  97 005a 1B89     	 ldrh r3,[r3,#8]
+  98 005c 182B     	 cmp r3,#24
+  99 005e 08D1     	 bne .L1
+  24:../customtime.c **** 		time->days++;
+ 100              	 .loc 1 24 0
+ 101 0060 7B68     	 ldr r3,[r7,#4]
+ 102 0062 9B7A     	 ldrb r3,[r3,#10]
+ 103 0064 0133     	 adds r3,r3,#1
+ 104 0066 DAB2     	 uxtb r2,r3
+ 105 0068 7B68     	 ldr r3,[r7,#4]
+ 106 006a 9A72     	 strb r2,[r3,#10]
+  25:../customtime.c **** 		time->hours = 0;
+ 107              	 .loc 1 25 0
+ 108 006c 7B68     	 ldr r3,[r7,#4]
+ 109 006e 0022     	 movs r2,#0
+ 110 0070 1A81     	 strh r2,[r3,#8]
+ 111              	.L1:
+  26:../customtime.c **** 	}
+  27:../customtime.c **** }
+ 112              	 .loc 1 27 0
+ 113 0072 0C37     	 adds r7,r7,#12
+ 114              	.LCFI3:
+ 115              	 .cfi_def_cfa_offset 4
+ 116 0074 BD46     	 mov sp,r7
+ 117              	.LCFI4:
+ 118              	 .cfi_def_cfa_register 13
+ 119              	 
+ 120 0076 5DF8047B 	 ldr r7,[sp],#4
+ 121              	.LCFI5:
+ 122              	 .cfi_restore 7
+ 123              	 .cfi_def_cfa_offset 0
+ 124 007a 7047     	 bx lr
+ 125              	 .cfi_endproc
+ 126              	.LFE0:
+ 128              	 .text
+ 129              	.Letext0:
+ 130              	 .file 2 "c:\\infineon\\tools\\dave ide\\4.5.0.202105191637\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 131              	 .file 3 "c:\\infineon\\tools\\dave ide\\4.5.0.202105191637\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 132              	 .file 4 "C:/LETI/2_ano/SISEM/Versao22-05-24/SISEM_2024_2DB_02_C/customtime.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 customtime.c
+    {standard input}:20     .text.updateTime:00000000 $t
+    {standard input}:25     .text.updateTime:00000000 updateTime
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS
